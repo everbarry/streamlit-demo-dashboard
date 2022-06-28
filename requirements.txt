@@ -1,0 +1,5 @@
+plotly==5.8.2
+neo4j==4.4.3
+pandas==1.4.1
+streamlit==1.10.0
+tqdm==4.64.0
