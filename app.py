@@ -3,7 +3,6 @@ import numpy as np
 import random
 from neo4jDriver import Neo4jConnection
 import plotly.express as px
-from plotly_calplot import calplot, month_calplot
 import pandas as pd
 from tqdm import tqdm
 import datetime
@@ -154,18 +153,6 @@ def stackedBar(df):
     fig = px.histogram(dfconv[dfconv["lang"].isin(intlang)], x="diff", marginal="box", color="lang", nbins=25,
                        labels={"convdiff": "Sentiment Difference", },
                        title="KLM Langauge performance (Showcase of Multilingual model)", height=800)
-    return fig
-
-
-def season(df):
-    df = df[df.author != 56377143]
-    dfklm = df[["conv", "timestamp", "diff"]].agg(
-        {"conv": lambda x: x.iloc[0], "timestamp": lambda x: x.iloc[0], "diff": "mean"})
-    dfklm['date'] = pd.to_datetime(dfklm["timestamp"])
-    dfklm['date'] = pd.to_datetime(dfklm['date'])
-    dfklm['diff'] = dfklm['diff'] + 4.0
-    fig = calplot(dfklm, x="date", y="diff", colorscale="thermal", gap=0, month_lines_width=3, month_lines_color="#fff",
-                  space_between_plots=0.25, years_title=True)
     return fig
 
 
